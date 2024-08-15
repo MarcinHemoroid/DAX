@@ -1,11 +1,14 @@
 # DAX
 ## Obliczanie dni roboczych pomiędzy dwiema datami, bez dni świątecznych
 <li> średnia
+
 ```
 AvgDelivery:=
 AVERAGEX ( sales, INT ( sales[delivery date] - sales[order date] ) + 1 )
 ```
+
 <li> średnia dni robocze
+    
 ```
 Avg_Delivery_WD :=
 AVERAGEX (
