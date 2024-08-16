@@ -30,10 +30,22 @@ AVERAGEX (
 <li> średnia liczba dni, dni robocze z uwzględnieniem świąt
     
 ```
-M5_AvgDelivery WD DT = AVERAGEX(sales,
-VAR RangeOfDates = DATESBETWEEN(calendar1[date],sales[order date],sales[delivery date])
-VAR NumberOfWorkingDays = CALCULATE(COUNTROWS(calendar1), RangeOfDates , NOT ( WEEKDAY(calendar1[date]) IN {1,7}), calendar1[is holiday] = 0)
-RETURN NumberOfWorkingDays)
+M5_AvgDelivery WD DT =
+AVERAGEX (
+    sales,
+    VAR RangeOfDates =
+        DATESBETWEEN ( calendar1[date], sales[order date], sales[delivery date] )
+    VAR NumberOfWorkingDays =
+        CALCULATE (
+            COUNTROWS ( calendar1 ),
+            RangeOfDates,
+            NOT ( WEEKDAY ( calendar1[date] ) IN { 1, 7 } ),
+            calendar1[is holiday] = 0
+        )
+    RETURN
+        NumberOfWorkingDays
+)
+
 ```
 
 ![Liczba dni roboczych pomiędzy datami z uwzględnieniem świąt](https://github.com/user-attachments/assets/98eaf19c-a7c5-4c72-bd97-e9613b5604e0)
