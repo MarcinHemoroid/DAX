@@ -1,13 +1,13 @@
 # DAX
 ## Obliczanie dni roboczych pomiędzy dwiema datami, bez dni świątecznych
-<li> średnia
+<li> średnia liczba dni
 
 ```
 AvgDelivery:=
 AVERAGEX ( sales, INT ( sales[delivery date] - sales[order date] ) + 1 )
 ```
 
-<li> średnia dni robocze
+<li> średnia liczba dni, dni robocze
     
 ```
 Avg_Delivery_WD :=
@@ -23,7 +23,20 @@ AVERAGEX (
         NumberOfWorkingDays
 )
 ```
-Na podstawie dataset KajoData i Kompletny przewodnik po DAX, Marco Russo, Alberto Ferrari.
+
 
 ![Liczba dni roboczych pomiędzy datami bez świąt](https://github.com/user-attachments/assets/d39c2b7a-5b6a-4c92-89b0-f969c989174b)
 
+<li> średnia liczba dni, dni robocze z uwzględnieniem świąt
+    
+```
+M5_AvgDelivery WD DT = AVERAGEX(sales,
+VAR RangeOfDates = DATESBETWEEN(calendar1[date],sales[order date],sales[delivery date])
+VAR NumberOfWorkingDays = CALCULATE(COUNTROWS(calendar1), RangeOfDates , NOT ( WEEKDAY(calendar1[date]) IN {1,7}), calendar1[is holiday] = 0)
+RETURN NumberOfWorkingDays)
+```
+
+![Liczba dni roboczych pomiędzy datami z uwzględnieniem świąt](https://github.com/user-attachments/assets/98eaf19c-a7c5-4c72-bd97-e9613b5604e0)
+
+
+Na podstawie dataset KajoData i Kompletny przewodnik po DAX, Marco Russo, Alberto Ferrari.
