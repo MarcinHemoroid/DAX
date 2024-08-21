@@ -52,3 +52,28 @@ AVERAGEX (
 
 
 Na podstawie dataset KajoData i Kompletny przewodnik po DAX, Marco Russo, Alberto Ferrari.
+
+## Pokazywanie łącznie danych budżetu i sprzedaży
+
+<li> Pytanie biznesowe: jaka powinna być skorygowana prognoza budżetu znając rzeczywistą sprzedaż od początku roku do 15 sierpnia i znając założenia budżetowe do końca roku.
+    
+```
+AjustedBudgetOptimized =
+VAR LastDatewithSales =
+    CALCULATE ( MAX ( sale[OrderDateKey] ), ALL ( sale ) )
+VAR SalesAmount = [Sale Amnt]
+VAR BudgetAmount =
+    CALCULATE ( [Budget Amnt], KEEPFILTERS ( 'date'[DateKey] > LastDatewithSales ) )
+VAR AdjustedBudget = SalesAmount + BudgetAmount
+RETURN
+    AdjustedBudget
+```
+
+![screen pokazywanie łącznie danych budżetu i sprzedaży](https://github.com/user-attachments/assets/48c55c79-0484-4c2b-9c9a-198fc091aa51)
+
+Na podstawie dataset Kompletny przewodnik po DAX, Marco Russo, Alberto Ferrari.
+
+
+
+
+
