@@ -73,7 +73,34 @@ RETURN
 
 Na podstawie dataset Kompletny przewodnik po DAX, Marco Russo, Alberto Ferrari.
 
+## Pokazywanie łącznie danych budżetu i sprzedaży
 
+<li> Zadanie: Numerowanie sekwencji zdarzeń z użyciem RANKX
+
+
+```
+OrderPosition =
+VAR CurrentCustomerKey = sale[CustomerKey]
+VAR CustomerOrders =
+    ALL ( sale[CustomerKey], sale[Order Number] )
+VAR OrdersCurrentCustomer =
+    FILTER ( CustomerOrders, sale[CustomerKey] = CurrentCustomerKey )
+VAR Position =
+    RANKX (
+        OrdersCurrentCustomer,
+        sale[Order Number],
+        sale[Order Number],
+        ASC,
+        DENSE
+    )
+RETURN
+    Position
+```
+
+![Numerowanie sekwencji zdarzeń](https://github.com/user-attachments/assets/dd2aaca1-8227-4ccc-b36e-a63053cec488)
+
+
+Na podstawie dataset Kompletny przewodnik po DAX, Marco Russo, Alberto Ferrari.
 
 
 
