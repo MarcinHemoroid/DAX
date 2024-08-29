@@ -73,7 +73,7 @@ RETURN
 
 Na podstawie dataset Kompletny przewodnik po DAX, Marco Russo, Alberto Ferrari.
 
-## Pokazywanie łącznie danych budżetu i sprzedaży
+## Numerowanie sekwencji zdarzeń
 
 <li> Zadanie: Numerowanie sekwencji zdarzeń z użyciem RANKX
 
